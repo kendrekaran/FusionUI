@@ -1,123 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import { Sun, Moon, BarChart3, Shield, Wallet } from 'lucide-react';
+'use client';
 
-function App() {
-  const [isDark, setIsDark] = useState(false);
+import { motion } from 'framer-motion';
+import { ApertureIcon, Code2, FileKey2, Sparkles,  Star,  Zap} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Cover } from '../ui/cover';
 
-  useEffect(() => {
-    // Check system preference on mount
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setIsDark(true);
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
+export function Hero1() {
+  const floatingElements = [
+    { id: 1, left: 10, top: 40, icon: <ApertureIcon className="w-8 h-8 text-purple-500 sm:inline-block hidden" />},
+    { id: 2, left: 50, top: 20, icon: <FileKey2 className="w-8 h-8 text-purple-500 hidden sm:inline-block" /> },
+    { id: 3, left: 85, top: 70, icon: <Code2 className="w-8 h-8 text-purple-500 hidden sm:inline-block" /> },
+  ];
+  
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'bg-zinc-900' : 'bg-white'}`}>
-      {/* Navigation */}
-      <nav className={`px-6 py-4 ${isDark ? 'bg-zinc-800/50' : 'bg-gray-50'}`}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-1">
-            <BarChart3 className="w-6 h-6 text-blue-500" />
-            <span className={`font-bold text-xl ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Spectrum
-            </span>
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-8">
-            <NavLink href="#" active>About</NavLink>
-            <NavLink href="#">Features</NavLink>
-            <NavLink href="#">Pricing</NavLink>
-            <NavLink href="#">Gallery</NavLink>
-            <NavLink href="#">Team</NavLink>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full ${isDark ? 'bg-zinc-700 text-zinc-300 hover:bg-zinc-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-            >
-              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-            <button className={`px-4 py-2 rounded-lg ${isDark ? 'text-zinc-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'}`}>
-              Sign In
-            </button>
-            <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-              Register
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="inline-block">
-              <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDark ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-50 text-blue-600'}`}>
-                <div className="flex items-center space-x-2">
-                  <Shield className="w-4 h-4" />
-                  <span>PROTECT YOUR DATA</span>
-                </div>
-              </div>
+    <div className="h-[30rem]   w-full  bg-grid-white/[0.2] py-20 relative flex items-center justify-center">
+    <div className="absolute pointer-events-none inset-0 flex items-center justify-center border border-gray-400 rounded-3xl bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      <div id='hero' className="w-full relative">
+        <div className="relative container sm:pt-44 sm:pb-32 ">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex justify-center"
+          >
+            <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-primary/70 text-primary-foreground mb-8 border border-primary/20 z-50">
+              <Sparkles className="h-3 w-3 mr-2" />
+              <span>Transforming Ideas into Reality</span>
             </div>
+          </motion.div>
 
-            <h1 className={`text-5xl md:text-6xl font-bold leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Secure
-              <br />
-              Communication
-            </h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-4xl md:text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 mb-6 z-50"
+          >
+            Build amazing websites <br /> with <Cover><span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Zen Ops</span></Cover>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="z-50 text-lg md:text-sm text-center text-muted-foreground max-w-2xl px-16 md:px-16 mx-auto mb-8"
+          >
+            Create stunning, high-performance web applications with our modern development solutions. Experience the perfect blend of design and functionality.
+          </motion.p>
 
-            <p className={`text-xl ${isDark ? 'text-zinc-400' : 'text-gray-600'}`}>
-              Protect your sensitive information with enterprise-grade encryption and secure communication channels. Your data safety is our top priority.
-            </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="z-50 flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <Button size="sm" className="bg-gradient-to-r text-white from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+              Get Started
+            </Button>
+            <Button size="sm" variant="outline" className='bg-black text-white'>
+              Learn More
+            </Button>
+          </motion.div>
 
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105">
-              Contact Us
-            </button>
-          </div>
 
-          <div className="relative">
-            <div className={`absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl opacity-10 blur-2xl ${isDark ? 'opacity-20' : 'opacity-10'}`} />
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1000"
-                alt="Security Illustration"
-                className="w-full rounded-3xl shadow-2xl"
-              />
-              <div className={`absolute -bottom-6 -right-6 p-6 rounded-2xl ${isDark ? 'bg-zinc-800' : 'bg-white'} shadow-xl`}>
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-green-500/10 rounded-xl">
-                    <Wallet className="w-8 h-8 text-green-500" />
-                  </div>
-                  <div>
-                    <p className={`text-sm ${isDark ? 'text-zinc-400' : 'text-gray-600'}`}>Protected Amount</p>
-                    <p className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>$2.4M</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="absolute inset-0 pointer-events-none">
+            {floatingElements.map((element) => (
+              <motion.div
+                key={element.id} 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  delay: 1, 
+                  duration: 0.5,
+                  ease: "easeInOut",
+                }}
+              >
+                <motion.div
+                  className="absolute"
+                  style={{
+                    left: `${element.left}%`,
+                    top: `${element.top}%`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0], 
+                    opacity: [1, 0.8, 1], 
+                  }}
+                  transition={{
+                    duration: 3, 
+                    repeat: Infinity, 
+                    delay: 1 + element.id * 0.8, 
+                    ease: "easeInOut", 
+                  }}
+                >
+                  <div className="text-blue-500 w-6 h-6">{element.icon}</div> 
+                </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-function NavLink({ href, children, active = false }: { href: string; children: React.ReactNode; active?: boolean }) {
-  return (
-    <a
-      href={href}
-      className={`text-sm font-medium transition-colors hover:text-blue-500 ${
-        active ? 'text-blue-500' : 'text-gray-600 dark:text-gray-300'
-      }`}
-    >
-      {children}
-    </a>
-  );
-}
-
-export default App;

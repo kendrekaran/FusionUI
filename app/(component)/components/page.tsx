@@ -1,15 +1,16 @@
-
 "use client"
-import { SetStateAction, useState } from "react";
-import { MainNav } from "@/components/Sidebar";
-import { RightSidebar } from "@/components/Righbar";
-import Navbar from "@/components/Navbar";
-import Introduction from "@/components/SideComponents/Introduction";
-import Installation from "@/components/SideComponents/Installation";
-import HeroSections from "@/components/SideComponents/HeroSections";
+import Navbar from '@/components/Navbar'
+import { RightSidebar } from '@/components/Righbar'
+import { MainNav } from '@/components/Sidebar'
+import HeroSections from '@/components/SideComponents/HeroSections'
+import Installation from '@/components/SideComponents/Installation'
+import Introduction from '@/components/SideComponents/Introduction'
+import Pricing from '@/components/SideComponents/Pricising'
+import TestimonialsSection from '@/components/SideComponents/TestimonialsSection'
+import { PricingSection } from '@/components/SingleComponent.tsx/Pricing01'
+import React, { SetStateAction, useState } from 'react'
 
-export default function Page() {
-  // State to manage the selected content
+const page = () => {
   const [selectedContent, setSelectedContent] = useState("Introduction");
 
   // Map sidebar items to their corresponding components
@@ -17,10 +18,12 @@ export default function Page() {
     Introduction: <Introduction />,
     Installation: <Installation />,
     Hero: <HeroSections />,
+    Testimonials : <TestimonialsSection/>,
+    pricing : <Pricing/>
   };
 
   return (
-    <div className="bg-black text-white">
+<div className="bg-black text-white">
       <Navbar />
       <div className="flex min-h-screen h-screen overflow-hidden p-4">
         <aside className="hidden w-64 border-r border-gray-800 bg-black lg:block h-screen overflow-y-auto">
@@ -37,5 +40,7 @@ export default function Page() {
         </aside>
       </div>
     </div>
-  );
+  )
 }
+
+export default page

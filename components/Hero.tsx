@@ -67,7 +67,7 @@ export function Hero() {
         </div>
 
         <div className="z-50 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
-            <Link href="/component">
+            <Link href="/components">
                 <Button 
                     className="relative group bg-white hover:bg-gray-50 text-black shadow-lg transition-all duration-300 ease-in-out w-full sm:w-auto px-4"
                 >
