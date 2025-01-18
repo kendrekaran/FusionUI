@@ -18,9 +18,7 @@ export function RightSidebar() {
           <p className="text-sm text-white">
             Trusted by OpenAI, Sonos, Chick-fil-A, and more.
           </p>
-          <p className="text-sm text-white">
-            Vercel provides tools and infrastructure to deploy apps and features at scale.
-          </p>
+         
           <Button variant="outline" className="w-full bg-black">
             Deploy Now
           </Button>
