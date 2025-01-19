@@ -38,7 +38,7 @@ export default function Testimonials() {
   }
 
   return (
-      <div className="relative max-w-6xl mx-auto px-4 border rounded-3xl  border-gray-400  py-8">
+      <div className="relative max-w-6xl mx-auto px-4 border rounded-3xl  border-gray-600  py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

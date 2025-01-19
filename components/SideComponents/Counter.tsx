@@ -2,14 +2,9 @@
 
 import React, { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
-import { Hero1 } from '../SingleComponent.tsx/Hero1'
-import { Hero02 } from '../SingleComponent.tsx/Hero02';
+import Stats01 from '../SingleComponent.tsx/Counter01'
 
-interface HeroSectionsProps {
-  value?: string; // You can mark this prop as optional
-}
-
-const HeroSection: React.FC<HeroSectionsProps> = ({ value }) => {
+const CounterSection = () => {
   const [refreshKey, setRefreshKey] = useState(0)
   const [activeTab, setActiveTab] = useState('preview')
   const [copied, setCopied] = useState(false)
@@ -18,11 +13,11 @@ const HeroSection: React.FC<HeroSectionsProps> = ({ value }) => {
     setRefreshKey(prevKey => prevKey + 1)
   }
 
-  const HeroCode = `Code`
+  const CounterCode = `Code`
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(HeroCode)
+      await navigator.clipboard.writeText(CounterCode)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
@@ -32,8 +27,8 @@ const HeroSection: React.FC<HeroSectionsProps> = ({ value }) => {
 
   return (
     <div className='p-4 bg-gray-950 min-h-screen text-white'>
-      <h1 className='text-4xl font-bold'>Hero Sections</h1>
-      <p className='text-sm text-gray-400 py-1'>These are some of the Hero Sections</p>
+      <h1 className='text-4xl font-bold'>Count Sections</h1>
+      <p className='text-sm text-gray-400 py-1'>These are some of the Count Sections</p>
       
       <div className='flex items-center gap-4 mt-4'>
         <div className='flex bg-black border border-gray-600 rounded-lg'>
@@ -70,9 +65,8 @@ const HeroSection: React.FC<HeroSectionsProps> = ({ value }) => {
       <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
         {activeTab === 'preview' ? (
           <div className=''>
-          {value === 'Hero1' && <Hero1 key={refreshKey} />}
-          {value === 'Hero2' && <Hero02 key={refreshKey} />}          
-        </div>
+            <Stats01 key={refreshKey}/>
+          </div>
         ) : (
           <div className='relative'>
             <button
@@ -87,7 +81,7 @@ const HeroSection: React.FC<HeroSectionsProps> = ({ value }) => {
             </button>
             <pre className='p-4 h-96 bg-gray-950 overflow-x-auto overflow-y-auto scrollbar'>
               <code className='text-gray-300 text-sm'>
-                {HeroCode}
+                {CounterCode}
               </code>
             </pre>
           </div>
@@ -97,4 +91,4 @@ const HeroSection: React.FC<HeroSectionsProps> = ({ value }) => {
   )
 }
 
-export default HeroSection
+export default CounterSection

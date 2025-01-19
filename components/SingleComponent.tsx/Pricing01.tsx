@@ -39,9 +39,9 @@ const plans = [
   }
 ];
 
-export function PricingSection() {
+export function Pricing01() {
   return (
-    <section id="price" className="py-8 bg-black border border-gray-400 rounded-3xl">
+    <section id="price" className="py-8 bg-black border border-gray-600 rounded-3xl">
       <div className="container mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

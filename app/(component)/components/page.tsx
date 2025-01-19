@@ -2,12 +2,18 @@
 import Navbar from '@/components/Navbar'
 import { RightSidebar } from '@/components/Righbar'
 import { MainNav } from '@/components/Sidebar'
+import CardsSection from '@/components/SideComponents/CardsSections'
+import Counter from '@/components/SideComponents/Counter'
+import FaqSection from '@/components/SideComponents/FAQSections'
+import FooterSections from '@/components/SideComponents/FooterSections'
+import GraphsSection from '@/components/SideComponents/GraphsSection'
 import HeroSections from '@/components/SideComponents/HeroSections'
 import Installation from '@/components/SideComponents/Installation'
 import Introduction from '@/components/SideComponents/Introduction'
 import Pricing from '@/components/SideComponents/Pricising'
+import ProjectsSection from '@/components/SideComponents/ProjectSections'
+import TeamSection from '@/components/SideComponents/TeamSections'
 import TestimonialsSection from '@/components/SideComponents/TestimonialsSection'
-import { PricingSection } from '@/components/SingleComponent.tsx/Pricing01'
 import React, { SetStateAction, useState } from 'react'
 
 const page = () => {
@@ -18,8 +24,17 @@ const page = () => {
     Introduction: <Introduction />,
     Installation: <Installation />,
     Hero: <HeroSections />,
+    Hero1: <HeroSections  value={"Hero1"}/>,
+    Hero2: <HeroSections  value={"Hero2"}/>,
     Testimonials : <TestimonialsSection/>,
-    pricing : <Pricing/>
+    pricing : <Pricing/>,
+    footer : <FooterSections/>,
+    graph : <GraphsSection/>,
+    cards : <CardsSection/>,
+    team: <TeamSection/>,
+    count : <Counter/>,
+    projects : <ProjectsSection/>,
+    faq : <FaqSection/>
   };
 
   return (

@@ -17,26 +17,48 @@ export default {
   ],
   theme: {
   	extend: {
-		animation: {
-			marquee: "marquee 5s linear infinite",
-			spotlight: "spotlight 2s ease .75s 1 forwards",
-		  },
-		  keyframes: {
-			marquee: {
-				"0%": { transform: "translateX(0%)" },
-				"100%": { transform: "translateX(-100%)" },
-			  },
-			spotlight: {
-			  "0%": {
-				opacity : 0,
-				transform: "translate(-72%, -62%) scale(0.5)",
-			  },
-			  "100%": {
-				opacity : 1,
-				transform: "translate(-50%,-40%) scale(1)",
-			  },
-			},
-		  },
+  		animation: {
+  			marquee: 'marquee 5s linear infinite',
+  			spotlight: 'spotlight 2s ease .75s 1 forwards',
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
+  		},
+  		keyframes: {
+  			marquee: {
+  				'0%': {
+  					transform: 'translateX(0%)'
+  				},
+  				'100%': {
+  					transform: 'translateX(-100%)'
+  				}
+  			},
+  			spotlight: {
+  				'0%': {
+  					opacity: 0,
+  					transform: 'translate(-72%, -62%) scale(0.5)'
+  				},
+  				'100%': {
+  					opacity: 1,
+  					transform: 'translate(-50%,-40%) scale(1)'
+  				}
+  			},
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -83,8 +105,8 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		},
-  	},
+  		}
+  	}
   },
   plugins: [require("tailwindcss-animate"),require('tailwind-scrollbar'),
 	function ({ matchUtilities, theme }: any) {

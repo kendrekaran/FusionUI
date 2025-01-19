@@ -15,7 +15,7 @@ export function Hero1() {
 
   return (
     <div className="h-[30rem]   w-full  bg-grid-white/[0.2] py-20 relative flex items-center justify-center">
-    <div className="absolute pointer-events-none inset-0 flex items-center justify-center border border-gray-400 rounded-3xl bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+    <div className="absolute pointer-events-none inset-0 flex items-center justify-center border border-gray-600 rounded-3xl bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div id='hero' className="w-full relative">
         <div className="relative container sm:pt-44 sm:pb-32 ">
           <motion.div
