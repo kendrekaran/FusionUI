@@ -3,6 +3,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import Testimonials01 from '../SingleComponent.tsx/Testimonials'
+import Testimonials02 from '../SingleComponent.tsx/Testimonials01'
 
 type TestimonialsType = 'Testimonials1' | 'Testimonials2'
 type TabType = 'preview' | 'code'
@@ -78,8 +79,8 @@ const TestimonialsSection = ({ value }: TestimonialsSectionsProps) => {
   }, [TestimonialsCode])
 
   const renderTestimonialsComponent = () => {
-    if (!value) return null
     if (value === 'Testimonials1') return <Testimonials01 key={refreshKey} />
+    if (value === 'Testimonials2') return <Testimonials02 key={refreshKey} />
     return null
   }
 

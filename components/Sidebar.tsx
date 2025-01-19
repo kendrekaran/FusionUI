@@ -45,19 +45,22 @@ export function MainNav({ onSelect }: MainNavProps) {
     {
       title: 'Testimonials Section',
       items: [
-        { name: 'Testimonials', label: 'Testimonials 01', isNew: true }
+        { name: 'Testimonials1', label: 'Testimonials 01', isNew: true },
+        { name: 'Testimonials2', label: 'Testimonials 02', isNew: true }
       ]
     },
     {
       title: 'Pricing Sections',
       items: [
-        { name: 'pricing', label: 'Pricing 01', isNew: false }
+        { name: 'pricing1', label: 'Pricing 01', isNew: false },
+        { name: 'pricing2', label: 'Pricing 02', isNew: false },
       ]
     },
     {
       title: 'Footer Sections',
       items: [
-        { name: 'footer', label: 'Footer 02', isNew: true }
+        { name: 'footer1', label: 'Footer 01', isNew: true },
+        { name: 'footer2', label: 'Footer 02', isNew: true }
       ]
     },
     {

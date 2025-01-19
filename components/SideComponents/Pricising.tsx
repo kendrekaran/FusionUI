@@ -3,6 +3,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { Pricing01 } from '../SingleComponent.tsx/Pricing01'
+import Pricing02 from '../SingleComponent.tsx/Pricing02'
 
 type PricingType = 'Pricing1' | 'Pricing2'
 type TabType = 'preview' | 'code'
@@ -78,8 +79,8 @@ const PricingSection = ({ value }: PricingSectionsProps) => {
   }, [PricingCode])
 
   const renderPricingComponent = () => {
-    if (!value) return null
     if (value === 'Pricing1') return <Pricing01 key={refreshKey} />
+    if (value === 'Pricing2') return <Pricing02 key={refreshKey} />
     return null
   }
 

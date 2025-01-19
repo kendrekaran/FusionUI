@@ -3,6 +3,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { Footer01 } from '../SingleComponent.tsx/Footer01'
+import Footer02 from '../SingleComponent.tsx/Footer02'
 
 type FooterType = 'Footer1' | 'Footer2'
 type TabType = 'preview' | 'code'
@@ -80,6 +81,7 @@ const FooterSection = ({ value }: FooterSectionsProps) => {
   const renderFooterComponent = () => {
     if (!value) return null
     if (value === 'Footer1') return <Footer01 key={refreshKey} />
+    if (value === 'Footer2') return <Footer02 key={refreshKey} />
     return null
   }
 

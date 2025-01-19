@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <nav className="bg-black text-white border-b border-gray-800 ">
