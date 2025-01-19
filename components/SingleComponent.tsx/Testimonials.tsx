@@ -26,7 +26,7 @@ const testimonials = [
   },
 ];
 
-export default function Testimonials() {
+export default function Testimonials01() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   const next = () => {
@@ -120,7 +120,6 @@ export default function Testimonials() {
             </Button>
           </div>
 
-          {/* Dots Indicator */}
           <div className="flex justify-center gap-3 mt-6">
             {testimonials.map((_, index) => (
               <button

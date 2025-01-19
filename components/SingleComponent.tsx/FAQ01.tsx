@@ -51,7 +51,7 @@ export function FAQ01() {
                   {faq.answer}
                 </AccordionContent>
                 {hoveredIndex === i && (
-                  <div className="absolute inset-0 -z-10 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 rounded-xl blur-xl transition-opacity duration-500" />
+                  <div className="absolute inset-0 -z-10 rounded-xl blur-xl transition-opacity duration-500" />
                 )}
               </AccordionItem>
             ))}

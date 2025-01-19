@@ -23,30 +23,29 @@ const page = () => {
   const componentsMap = {
     Introduction: <Introduction />,
     Installation: <Installation />,
-    Hero: <HeroSections />,
     Hero1: <HeroSections  value={"Hero1"}/>,
     Hero2: <HeroSections  value={"Hero2"}/>,
-    Testimonials : <TestimonialsSection/>,
-    pricing : <Pricing/>,
-    footer : <FooterSections/>,
-    graph : <GraphsSection/>,
-    cards : <CardsSection/>,
-    team: <TeamSection/>,
-    count : <Counter/>,
-    projects : <ProjectsSection/>,
-    faq : <FaqSection/>
+    Testimonials : <TestimonialsSection value={"Testimonials1"}/>,
+    pricing : <Pricing value={"Pricing1"}/>,
+    footer : <FooterSections value={"Footer1"}/>,
+    graph : <GraphsSection value={"Graph1"}/>,
+    cards : <CardsSection value={"Cards1"}/>,
+    team: <TeamSection value={"Team1"}/>,
+    count : <Counter value={"Count1"}/>,
+    projects : <ProjectsSection value={"Project1"}/>,
+    faq : <FaqSection value={"FAQ1"}/>
   };
 
   return (
-<div className="bg-black text-white">
-      <Navbar />
-      <div className="flex min-h-screen h-screen overflow-hidden p-4">
+  <div className="bg-black text-white  ">
+      <Navbar/>
+      <div className="flex  overflow-hidden p-4 h-[92vh] overflow-y-hidden">
         <aside className="hidden w-64 border-r border-gray-800 bg-black lg:block h-screen overflow-y-auto">
           {/* Pass setSelectedContent to MainNav */}
           <MainNav onSelect={(componentName: SetStateAction<string>) => setSelectedContent(componentName)} />
         </aside>
 
-        <main className="flex-1 px-8 py-8 overflow-x-auto  scrollbar-thin scrollbar-thumb-black scrollbar-track-black">
+        <main className="flex-1 px-8 py-8 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
           {componentsMap[selectedContent] || <p>Select an item from the sidebar</p>}
         </main>
 
