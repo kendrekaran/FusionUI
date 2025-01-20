@@ -31,10 +31,6 @@ const Introduction = () => {
             Pick the components you need. Copy and paste the code into your project and customize to your needs. The code is yours.
             </p>
 
-            <p className="leading-7 italic">
-            Use this as a reference to build your own component libraries.
-            </p>
-
         
         </div>
     </div>

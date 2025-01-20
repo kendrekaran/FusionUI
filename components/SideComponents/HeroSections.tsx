@@ -4,8 +4,9 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import { Hero1 } from '../SingleComponent.tsx/Hero1'
 import { Hero02 } from '../SingleComponent.tsx/Hero02'
+import Hero03 from '../SingleComponent.tsx/Hero03'
 
-type HeroType = 'Hero1' | 'Hero2'
+type HeroType = 'Hero1' | 'Hero2' | 'Hero3'
 type TabType = 'preview' | 'code'
 
 interface HeroSectionsProps {
@@ -36,7 +37,10 @@ const HERO_CODE_MAP: Record<HeroType, string> = {
 `,
   Hero2: `import React from 'react'
 // Hero 2 component code here...
-`
+`,
+  Hero3: `import React from 'react'
+// Hero 1 component code here...
+`,
 }
 
 const HeroSection = ({ value }: HeroSectionsProps) => {
@@ -79,9 +83,9 @@ const HeroSection = ({ value }: HeroSectionsProps) => {
   }, [heroCode])
 
   const renderHeroComponent = () => {
-    if (!value) return null
     if (value === 'Hero1') return <Hero1 key={refreshKey} />
     if (value === 'Hero2') return <Hero02 key={refreshKey} />
+    if (value === 'Hero3') return <Hero03 key={refreshKey} />
     return null
   }
 

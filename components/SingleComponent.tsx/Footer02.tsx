@@ -35,7 +35,7 @@ const Footer02 = () => {
         >
           <h2 className="text-purple-400 mb-4">GET IN TOUCH</h2>
           <h3 className="text-4xl font-bold text-white mb-6">
-            LET'S <span className="text-purple-400">CONNECT</span>
+            LET&apos;S <span className="text-purple-400">CONNECT</span>
           </h3>
         </motion.div>
 

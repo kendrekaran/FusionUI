@@ -23,9 +23,12 @@ interface ExpandedSections {
   [key: string]: boolean
 }
 
+
+
 export function MainNav({ onSelect }: MainNavProps) {
   const [activeSection, setActiveSection] = useState<string>('Introduction')
   const [expandedSections, setExpandedSections] = useState<ExpandedSections>({})
+  
 
   const navigationSections: NavigationSection[] = [
     {
@@ -39,7 +42,8 @@ export function MainNav({ onSelect }: MainNavProps) {
       title: 'Hero Section',
       items: [
         { name: 'Hero1', label: 'Hero 01', isNew: false },
-        { name: 'Hero2', label: 'Hero 02', isNew: false }
+        { name: 'Hero2', label: 'Hero 02', isNew: false },
+        { name: 'Hero3', label: 'Hero 03', isNew: false },
       ]
     },
     {
@@ -66,13 +70,15 @@ export function MainNav({ onSelect }: MainNavProps) {
     {
       title: 'Graphs Sections',
       items: [
-        { name: 'graph', label: 'Graphs 01', isNew: false }
+        { name: 'graph1', label: 'Graphs 01', isNew: false },
+        { name: 'graph2', label: 'Graphs 02', isNew: false },
       ]
     },
     {
       title: 'Cards Sections',
       items: [
-        { name: 'cards', label: 'Cards 01', isNew: false }
+        { name: 'cards1', label: 'Cards 01', isNew: false },
+        { name: 'cards2', label: 'Cards 02', isNew: false },
       ]
     },
     {

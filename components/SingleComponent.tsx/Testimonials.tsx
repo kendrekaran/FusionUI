@@ -84,7 +84,7 @@ export default function Testimonials01() {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-md  md:text-2xl font-medium text-white leading-loose"
                 >
-                  "{testimonials[currentTestimonial].quote}"
+                  &quot;{testimonials[currentTestimonial].quote}&quot;
                 </motion.p>
                 <motion.div
                   key={`author-${currentTestimonial}`}

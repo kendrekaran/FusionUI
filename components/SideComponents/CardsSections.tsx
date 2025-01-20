@@ -3,6 +3,8 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import Cards from '../SingleComponent.tsx/Cards'
+import Cards02 from '../SingleComponent.tsx/Cards02'
+import Image from "next/image";
 
 type CardsType = 'Cards1' | 'Cards2'
 type TabType = 'preview' | 'code'
@@ -78,8 +80,8 @@ const CardsSection = ({ value }: CardsSectionsProps) => {
   }, [CardsCode])
 
   const renderCardsComponent = () => {
-    if (!value) return null
     if (value === 'Cards1') return <Cards key={refreshKey} />
+    if (value === 'Cards2') return <Cards02 key={refreshKey} />
     return null
   }
 
@@ -112,7 +114,7 @@ const CardsSection = ({ value }: CardsSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
+          <Image 
             src="refresh.svg" 
             alt="refresh" 
             className="h-4 w-4 text-white"

@@ -1,6 +1,5 @@
 
 import { motion } from 'framer-motion';
-import { Award, Heart, Target, Users } from 'lucide-react';
 
 const team = [
   {

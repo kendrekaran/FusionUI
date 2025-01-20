@@ -1,38 +1,8 @@
-import React, { useState } from 'react';
-import { Copy, Check, Terminal, ChevronRight } from 'lucide-react';
+import React from 'react';
+import {  ChevronRight } from 'lucide-react';
+import CodeBlock from '../CodeBlock';
 
 function Installation() {
-  const [copied, setCopied] = useState<{ [key: string]: boolean }>({});
-  
-  const handleCopy = async (text: string, id: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied({ ...copied, [id]: true });
-      setTimeout(() => {
-        setCopied(prev => ({ ...prev, [id]: false }));
-      }, 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
-
-  const CodeBlock = ({ command, id }: { command: string; id: string }) => (
-    <div className="relative flex items-center bg-zinc-900 rounded-lg p-4 group">
-      <Terminal className="w-5 h-5 text-zinc-500 mr-3" />
-      <code className="text-zinc-200 font-mono flex-1">{command}</code>
-      <button
-        onClick={() => handleCopy(command, id)}
-        className="absolute right-4 p-2 text-zinc-400 hover:text-white transition-colors"
-        aria-label="Copy to clipboard"
-      >
-        {copied[id] ? (
-          <Check className="w-5 h-5 text-green-500" />
-        ) : (
-          <Copy className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
-        )}
-      </button>
-    </div>
-  );
 
   return (
     <div className="min-h-screen  text-white ">
@@ -51,7 +21,7 @@ function Installation() {
           {/* Info Box */}
           <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
             <p className="text-zinc-300">
-              If you're using Next.js 15, see the{' '}
+              If you&apos;re using Next.js 15, see the{' '}
               <a
                 href="#"
                 className="text-blue-400 hover:text-blue-300 transition-colors"
@@ -140,7 +110,7 @@ function Installation() {
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-zinc-800 text-sm font-medium">
                   4
                 </span>
-                <h2 className="text-2xl font-semibold">That's it</h2>
+                <h2 className="text-2xl font-semibold">That&apos;s it</h2>
               </div>
               <p className="text-zinc-400 pl-11">
                 You can now start adding components to your project.

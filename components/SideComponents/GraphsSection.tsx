@@ -3,6 +3,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 import Graph01 from '../SingleComponent.tsx/Graph01'
+import Graph02 from '../SingleComponent.tsx/Graph02'
 
 type GraphType = 'Graph1' | 'Graph2'
 type TabType = 'preview' | 'code'
@@ -78,8 +79,8 @@ const GraphSection = ({ value }: GraphSectionsProps) => {
   }, [GraphCode])
 
   const renderGraphComponent = () => {
-    if (!value) return null
     if (value === 'Graph1') return <Graph01 key={refreshKey} />
+    if (value === 'Graph2') return <Graph02 key={refreshKey} />
     return null
   }
 

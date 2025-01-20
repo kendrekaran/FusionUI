@@ -127,7 +127,7 @@ export default function Graph01() {
             </div>
             <h2 className="text-xl font-bold text-white">Visual reports</h2>
             <p className="text-zinc-400">
-              Visual insights into your site's performance.
+              Visual insights into your site&apos;s performance.
             </p>
           </motion.div>
 
@@ -224,7 +224,7 @@ export function FeaturesGrid() {
               key={index}
               title={feature.title}
               description={feature.description}
-              //@ts-ignore
+              //@ts-expect-error i have no idea man
               icon={feature.icon}
             />
           ))}

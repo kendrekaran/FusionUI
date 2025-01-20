@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import {  Monitor, Smartphone, Layout } from 'lucide-react';
+import {  Monitor } from 'lucide-react';
 
 const designs = [
   {
