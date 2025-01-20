@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import {
   Accordion,
@@ -9,7 +7,7 @@ import {
 } from "@/components/ui/accordion"
 
 export function FAQ01() {
-  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null) // Type the state
 
   return (
     <section id="faq" className="w-full py-16 border border-gray-600 rounded-3xl ">
