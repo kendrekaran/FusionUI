@@ -17,7 +17,7 @@ import TeamSection from "@/components/SideComponents/TeamSections";
 import TestimonialsSection from "@/components/SideComponents/TestimonialsSection";
 import React, { useState } from "react";
 
-const Page = () => { // Capitalized 'P' for React component
+const Page = () => { 
   const componentsMap = {
     Introduction: <Introduction />,
     Installation: <Installation />,
@@ -47,11 +47,10 @@ const Page = () => { // Capitalized 'P' for React component
       <Navbar />
       <div className="flex overflow-hidden p-4 h-[92vh] overflow-y-hidden">
         <aside className="hidden w-64 border-r border-gray-800 bg-black lg:block h-screen overflow-y-auto">
-          {/* Pass setSelectedContent to MainNav */}
           <MainNav
             onSelect={(name: string) => {
               if (name in componentsMap) {
-                setSelectedContent(name as keyof typeof componentsMap); // Type assertion
+                setSelectedContent(name as keyof typeof componentsMap);
               } else {
                 console.error(`Invalid component name: ${name}`);
               }
