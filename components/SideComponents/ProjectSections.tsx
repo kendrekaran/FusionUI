@@ -1,8 +1,10 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import Project01 from '../SingleComponent.tsx/Projects01'
+import { usePathname } from 'next/navigation'
+import ProjectInstall1 from '../InstallProcess/ProjectInstall1'
 
 type ProjectType = 'Project1' | 'Project2'
 type TabType = 'preview' | 'code'
@@ -38,7 +40,9 @@ const Project_CODE_MAP: Record<ProjectType, string> = {
 `
 }
 
-const ProjectSection = ({ value }: ProjectSectionsProps) => {
+const ProjectSection = () => {
+  const pathname = usePathname()
+
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -47,9 +51,14 @@ const ProjectSection = ({ value }: ProjectSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+   const projectsType = useMemo<ProjectType | null>(() => {
+      if (pathname === '/projects/1') return 'Project1'
+      return null
+    }, [pathname])
+
   const ProjectCode = useMemo(() => {
-    return value ? Project_CODE_MAP[value] : ''
-  }, [value])
+    return projectsType ? Project_CODE_MAP[projectsType] : ''
+  }, [projectsType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -78,8 +87,15 @@ const ProjectSection = ({ value }: ProjectSectionsProps) => {
   }, [ProjectCode])
 
   const renderProjectComponent = () => {
-    if (!value) return null
-    if (value === 'Project1') return <Project01 key={refreshKey} />
+      if (projectsType === 'Project1') {
+        return(
+          <div>
+              <Project01 key={refreshKey} />
+              <ProjectInstall1 />
+          </div>
+        ) 
+      }
+   
     return null
   }
 
@@ -112,17 +128,11 @@ const ProjectSection = ({ value }: ProjectSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+          <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden'>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderProjectComponent()}

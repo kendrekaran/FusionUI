@@ -1,8 +1,10 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import Stats01 from '../SingleComponent.tsx/Counter01'
+import { usePathname } from 'next/navigation'
+import CountInstall1 from '../InstallProcess/CountInstall1'
 
 type CounterType = 'Count1' | 'Count2'
 type TabType = 'preview' | 'code'
@@ -38,7 +40,8 @@ const Counter_CODE_MAP: Record<CounterType, string> = {
 `
 }
 
-const CounterSection = ({ value }: CounterSectionsProps) => {
+const CounterSection = () => {
+  const pathname = usePathname()
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -47,9 +50,15 @@ const CounterSection = ({ value }: CounterSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+    const countType = useMemo<CounterType | null>(() => {
+      if (pathname === '/count/1') return 'Count1'
+      return null
+    }, [pathname])
+  
+
   const CounterCode = useMemo(() => {
-    return value ? Counter_CODE_MAP[value] : ''
-  }, [value])
+    return countType ? Counter_CODE_MAP[countType] : ''
+  }, [countType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -78,10 +87,18 @@ const CounterSection = ({ value }: CounterSectionsProps) => {
   }, [CounterCode])
 
   const renderCounterComponent = () => {
-    if (!value) return null
-    if (value === 'Count1') return <Stats01 key={refreshKey} />
-    return null
+    if (countType === 'Count1') {
+      return(
+        <div>
+            <Stats01 key={refreshKey} />
+            <CountInstall1 />
+        </div>
+      ) 
+    }
+    return null;
   }
+
+
 
   return (
     <div className='p-4 min-h-screen text-white'>
@@ -112,17 +129,11 @@ const CounterSection = ({ value }: CounterSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+          <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden '>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderCounterComponent()}

@@ -1,9 +1,12 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import Graph01 from '../SingleComponent.tsx/Graph01'
 import Graph02 from '../SingleComponent.tsx/Graph02'
+import { usePathname } from 'next/navigation'
+import GraphInstall1 from '../InstallProcess/GraphsInstall1'
+import GraphInstall2 from '../InstallProcess/GraphsInstall2'
 
 type GraphType = 'Graph1' | 'Graph2'
 type TabType = 'preview' | 'code'
@@ -39,7 +42,8 @@ const Graph_CODE_MAP: Record<GraphType, string> = {
 `
 }
 
-const GraphSection = ({ value }: GraphSectionsProps) => {
+const GraphSection = () => {
+  const pathname = usePathname()
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -48,9 +52,15 @@ const GraphSection = ({ value }: GraphSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+    const graphType = useMemo<GraphType | null>(() => {
+      if (pathname === '/graphs/1') return 'Graph1'
+      if (pathname === '/graphs/2') return 'Graph2'
+      return null
+    }, [pathname])
+
   const GraphCode = useMemo(() => {
-    return value ? Graph_CODE_MAP[value] : ''
-  }, [value])
+    return graphType ? Graph_CODE_MAP[graphType] : ''
+  }, [graphType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -79,8 +89,23 @@ const GraphSection = ({ value }: GraphSectionsProps) => {
   }, [GraphCode])
 
   const renderGraphComponent = () => {
-    if (value === 'Graph1') return <Graph01 key={refreshKey} />
-    if (value === 'Graph2') return <Graph02 key={refreshKey} />
+    if (graphType === 'Graph1') {
+      return(
+        <div>
+            <Graph01 key={refreshKey} />
+            <GraphInstall1 />
+        </div>
+      ) 
+    }
+    if (graphType === 'Graph2') {
+     return(
+       <div>
+           <Graph02 key={refreshKey} />
+           <GraphInstall2 />
+       </div>
+     ) 
+   }
+   
     return null
   }
 
@@ -113,17 +138,11 @@ const GraphSection = ({ value }: GraphSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+         <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden '>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderGraphComponent()}

@@ -1,9 +1,12 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import { Pricing01 } from '../SingleComponent.tsx/Pricing01'
 import Pricing02 from '../SingleComponent.tsx/Pricing02'
+import { usePathname } from 'next/navigation'
+import PricingInstall1 from '../InstallProcess/PricingInstall1'
+import PricingInstall2 from '../InstallProcess/PricingInstall2'
 
 type PricingType = 'Pricing1' | 'Pricing2'
 type TabType = 'preview' | 'code'
@@ -39,7 +42,9 @@ const Pricing_CODE_MAP: Record<PricingType, string> = {
 `
 }
 
-const PricingSection = ({ value }: PricingSectionsProps) => {
+const PricingSection = () => {
+  const pathname = usePathname()
+
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -48,9 +53,15 @@ const PricingSection = ({ value }: PricingSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+    const pricingType = useMemo<PricingType | null>(() => {
+      if (pathname === '/pricing/1') return 'Pricing1'
+      if (pathname === '/pricing/2') return 'Pricing2'
+      return null
+    }, [pathname])
+
   const PricingCode = useMemo(() => {
-    return value ? Pricing_CODE_MAP[value] : ''
-  }, [value])
+    return pricingType ? Pricing_CODE_MAP[pricingType] : ''
+  }, [pricingType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -79,8 +90,23 @@ const PricingSection = ({ value }: PricingSectionsProps) => {
   }, [PricingCode])
 
   const renderPricingComponent = () => {
-    if (value === 'Pricing1') return <Pricing01 key={refreshKey} />
-    if (value === 'Pricing2') return <Pricing02 key={refreshKey} />
+     if (pricingType === 'Pricing1') {
+          return(
+            <div>
+                <Pricing01 key={refreshKey} />
+                <PricingInstall1 />
+            </div>
+          ) 
+        }
+      if (pricingType === 'Pricing2') {
+        return(
+          <div>
+              <Pricing02 key={refreshKey} />
+              <PricingInstall2 />
+          </div>
+        ) 
+      }
+    
     return null
   }
 
@@ -113,17 +139,11 @@ const PricingSection = ({ value }: PricingSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+          <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden'>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderPricingComponent()}

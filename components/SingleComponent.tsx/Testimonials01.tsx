@@ -85,8 +85,8 @@ export default function Testimonials02() {
                     <blockquote className="text-white mb-6">
                     &quot;{testimonial.quote}&quot;
                     </blockquote>
-                    <div className="flex items-center gap-2">
-                      <Avatar className="bg-zinc-800 h-8 w-8">
+                    <div className="flex items-center gap-4">
+                      <Avatar className="bg-gray-400 h-6 w-6">
                         <AvatarFallback className="text-black">
                           {testimonial.initial}
                         </AvatarFallback>

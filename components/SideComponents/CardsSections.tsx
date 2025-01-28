@@ -1,10 +1,12 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import Cards from '../SingleComponent.tsx/Cards'
 import Cards02 from '../SingleComponent.tsx/Cards02'
-import Image from "next/image";
+import { usePathname } from 'next/navigation'
+import CardInstall1 from '../InstallProcess/CardsInstall1'
+import CardInstall2 from '../InstallProcess/CardsInstall2'
 
 type CardsType = 'Cards1' | 'Cards2'
 type TabType = 'preview' | 'code'
@@ -40,7 +42,8 @@ const Cards_CODE_MAP: Record<CardsType, string> = {
 `
 }
 
-const CardsSection = ({ value }: CardsSectionsProps) => {
+const CardsSection = () => {
+  const pathname = usePathname()
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -49,9 +52,16 @@ const CardsSection = ({ value }: CardsSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+    const cardsType = useMemo<CardsType | null>(() => {
+      if (pathname === '/cards/1') return 'Cards1'
+      if (pathname === '/cards/2') return 'Cards2'
+      return null
+    }, [pathname])
+  
+
   const CardsCode = useMemo(() => {
-    return value ? Cards_CODE_MAP[value] : ''
-  }, [value])
+    return cardsType ? Cards_CODE_MAP[cardsType] : ''
+  }, [cardsType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -80,8 +90,24 @@ const CardsSection = ({ value }: CardsSectionsProps) => {
   }, [CardsCode])
 
   const renderCardsComponent = () => {
-    if (value === 'Cards1') return <Cards key={refreshKey} />
-    if (value === 'Cards2') return <Cards02 key={refreshKey} />
+    if (cardsType === 'Cards1') {
+      return(
+        <div>
+            <Cards key={refreshKey} />
+            <CardInstall1 />
+        </div>
+      ) 
+    }
+      
+      
+    if (cardsType === 'Cards2') {
+      return(
+        <div>
+            <Cards02 key={refreshKey} />
+            <CardInstall2 />
+        </div>
+      ) 
+    }
     return null
   }
 
@@ -114,17 +140,11 @@ const CardsSection = ({ value }: CardsSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <Image 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+          <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden'>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderCardsComponent()}

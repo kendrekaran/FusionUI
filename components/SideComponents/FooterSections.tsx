@@ -1,9 +1,12 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import { Footer01 } from '../SingleComponent.tsx/Footer01'
 import Footer02 from '../SingleComponent.tsx/Footer02'
+import { usePathname } from 'next/navigation'
+import FooterInstall1 from '../InstallProcess/FooterInstall1'
+import FooterInstall2 from '../InstallProcess/FooterInstall2'
 
 type FooterType = 'Footer1' | 'Footer2'
 type TabType = 'preview' | 'code'
@@ -39,18 +42,26 @@ const Footer_CODE_MAP: Record<FooterType, string> = {
 `
 }
 
-const FooterSection = ({ value }: FooterSectionsProps) => {
+const FooterSection = () => {
+  const pathname = usePathname()
+
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
     copied: false
   })
 
-  const { refreshKey, activeTab, copied } = state
+  const { refreshKey, activeTab, copied } = state 
+
+    const footerType = useMemo<FooterType | null>(() => {
+      if (pathname === '/footer/1') return 'Footer1'
+      if (pathname === '/footer/2') return 'Footer2'
+      return null
+    }, [pathname])
 
   const FooterCode = useMemo(() => {
-    return value ? Footer_CODE_MAP[value] : ''
-  }, [value])
+    return footerType ? Footer_CODE_MAP[footerType] : ''
+  }, [footerType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -79,10 +90,23 @@ const FooterSection = ({ value }: FooterSectionsProps) => {
   }, [FooterCode])
 
   const renderFooterComponent = () => {
-    if (!value) return null
-    if (value === 'Footer1') return <Footer01 key={refreshKey} />
-    if (value === 'Footer2') return <Footer02 key={refreshKey} />
-    return null
+    if (footerType === 'Footer1') {
+         return(
+           <div>
+               <Footer01 key={refreshKey} />
+               <FooterInstall1 />
+           </div>
+         ) 
+       }
+       if (footerType === 'Footer2') {
+        return(
+          <div>
+              <Footer02 key={refreshKey} />
+              <FooterInstall2 />
+          </div>
+        ) 
+      }
+   return null
   }
 
   return (
@@ -114,17 +138,11 @@ const FooterSection = ({ value }: FooterSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+          <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden '>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderFooterComponent()}

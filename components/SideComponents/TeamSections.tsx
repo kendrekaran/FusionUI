@@ -1,8 +1,10 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import Team01 from '../SingleComponent.tsx/Team01'
+import { usePathname } from 'next/navigation'
+import TeamInstall1 from '../InstallProcess/TeamInstall1'
 
 type TeamType = 'Team1' | 'Team2'
 type TabType = 'preview' | 'code'
@@ -38,7 +40,9 @@ const Team_CODE_MAP: Record<TeamType, string> = {
 `
 }
 
-const TeamSection = ({ value }: TeamSectionsProps) => {
+const TeamSection = () => {
+  const pathname = usePathname()
+
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -47,9 +51,14 @@ const TeamSection = ({ value }: TeamSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+    const teamType = useMemo<TeamType | null>(() => {
+      if (pathname === '/team/1') return 'Team1'
+      return null
+    }, [pathname])
+
   const TeamCode = useMemo(() => {
-    return value ? Team_CODE_MAP[value] : ''
-  }, [value])
+    return teamType ? Team_CODE_MAP[teamType] : ''
+  }, [teamType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -78,8 +87,14 @@ const TeamSection = ({ value }: TeamSectionsProps) => {
   }, [TeamCode])
 
   const renderTeamComponent = () => {
-    if (!value) return null
-    if (value === 'Team1') return <Team01 key={refreshKey} />
+    if (teamType === 'Team1') {
+      return(
+        <div>
+            <Team01 key={refreshKey} />
+            <TeamInstall1 />
+        </div>
+      ) 
+    }   
     return null
   }
 
@@ -112,17 +127,11 @@ const TeamSection = ({ value }: TeamSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+         <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden'>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderTeamComponent()}

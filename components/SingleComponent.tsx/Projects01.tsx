@@ -9,12 +9,12 @@ const designs = [
     projects: [
       {
         title: 'Saas Product',
-        image: 'https://pbs.twimg.com/media/GfeQZI0aEAAW3SH?format=jpg&name=medium',
+        image: 'https://i.pinimg.com/736x/83/f8/71/83f871685c88c59ac76b02aa1ec9a0a0.jpg',
         description: 'Modern Landing Page for your business'
       },
       {
-        title: 'Cloud Clipper',
-        image: 'https://pbs.twimg.com/media/GfeQViAbcAAUDbk?format=jpg&name=medium',
+        title: 'Ai Product',
+        image: 'https://i.pinimg.com/736x/87/55/c2/8755c2d8ed7a99f3bc9e1aca09de4b40.jpg',
         description: 'Modern Hero Section Design for your business'
       },
       {
@@ -24,7 +24,7 @@ const designs = [
       },
       {
         title: 'Banking App',
-        image: 'https://pbs.twimg.com/media/GNuSAe-WIAQo59e?format=jpg&name=large',
+        image: 'https://i.pinimg.com/736x/86/6a/eb/866aeb32c2296e284d33b5f93b184ad5.jpg',
         description: 'Modern Mobile Designs for Business'
       }
     ]

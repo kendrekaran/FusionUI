@@ -1,9 +1,12 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import Testimonials01 from '../SingleComponent.tsx/Testimonials'
 import Testimonials02 from '../SingleComponent.tsx/Testimonials01'
+import { usePathname } from 'next/navigation'
+import TestimonialsInstall1 from '../InstallProcess/TestimonialsInstall1'
+import TestimonialsInstall2 from '../InstallProcess/TestimonialsInstall2'
 
 type TestimonialsType = 'Testimonials1' | 'Testimonials2'
 type TabType = 'preview' | 'code'
@@ -39,7 +42,8 @@ const Testimonials_CODE_MAP: Record<TestimonialsType, string> = {
 `
 }
 
-const TestimonialsSection = ({ value }: TestimonialsSectionsProps) => {
+const TestimonialsSection = () => {
+  const pathname = usePathname()
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -48,9 +52,15 @@ const TestimonialsSection = ({ value }: TestimonialsSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+  const testType = useMemo<TestimonialsType | null>(() => {
+    if(pathname === '/testimonials/1') return 'Testimonials1'
+    if(pathname === '/testimonials/2') return 'Testimonials2'
+    return null
+  }, [pathname])
+
   const TestimonialsCode = useMemo(() => {
-    return value ? Testimonials_CODE_MAP[value] : ''
-  }, [value])
+    return testType ? Testimonials_CODE_MAP[testType] : ''
+  }, [testType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -79,8 +89,22 @@ const TestimonialsSection = ({ value }: TestimonialsSectionsProps) => {
   }, [TestimonialsCode])
 
   const renderTestimonialsComponent = () => {
-    if (value === 'Testimonials1') return <Testimonials01 key={refreshKey} />
-    if (value === 'Testimonials2') return <Testimonials02 key={refreshKey} />
+    if (testType === 'Testimonials1') {
+      return(
+        <div>
+            <Testimonials01 key={refreshKey} />
+            <TestimonialsInstall1 />
+        </div>
+      ) 
+    }
+  if (testType === 'Testimonials2') {
+    return(
+      <div>
+          <Testimonials02 key={refreshKey} />
+          <TestimonialsInstall2 />
+      </div>
+    ) 
+  }
     return null
   }
 
@@ -113,17 +137,11 @@ const TestimonialsSection = ({ value }: TestimonialsSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+          <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden'>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderTestimonialsComponent()}

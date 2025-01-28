@@ -5,9 +5,8 @@ export function RightSidebar() {
   return (
     <div className="space-y-8 text-white">
       <div>
-        <h3 className="text-lg font-semibold">On This Page</h3>
+        <h3 className="text-lg font-semibold">Follow me on Twitter</h3>
         <a href="#faq" className="block py-1 text-sm text-white hover:text-gray-400">
-          FAQ
         </a>
       </div>
       <Card className="border-muted bg-black text-white">

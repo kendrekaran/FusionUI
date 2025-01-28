@@ -1,8 +1,10 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import FAQ01 from '../SingleComponent.tsx/FAQ01'
+import { usePathname } from 'next/navigation'
+import FAQInstall1 from '../InstallProcess/FAQInstall1'
 
 type FAQType = 'FAQ1' | 'FAQ2'
 type TabType = 'preview' | 'code'
@@ -38,7 +40,9 @@ const FAQ_CODE_MAP: Record<FAQType, string> = {
 `
 }
 
-const FAQSection = ({ value }: FAQSectionsProps) => {
+const FAQSection = () => {
+  const pathname = usePathname()
+
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -47,9 +51,14 @@ const FAQSection = ({ value }: FAQSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+    const faqType = useMemo<FAQType | null>(() => {
+      if (pathname === '/faq/1') return 'FAQ1'
+      return null
+    }, [pathname])
+
   const FAQCode = useMemo(() => {
-    return value ? FAQ_CODE_MAP[value] : ''
-  }, [value])
+    return faqType ? FAQ_CODE_MAP[faqType] : ''
+  }, [faqType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -78,9 +87,14 @@ const FAQSection = ({ value }: FAQSectionsProps) => {
   }, [FAQCode])
 
   const renderFAQComponent = () => {
-    if (!value) return null
-    if (value === 'FAQ1') return <FAQ01 key={refreshKey} />
-    return null
+    if (faqType === 'FAQ1') {
+      return(
+        <div>
+            <FAQ01 key={refreshKey} />
+            <FAQInstall1 />
+        </div>
+      ) 
+    }
   }
 
   return (
@@ -112,17 +126,11 @@ const FAQSection = ({ value }: FAQSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+          <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden '>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderFAQComponent()}

@@ -1,17 +1,17 @@
 'use client'
 
 import React, { useCallback, useMemo, useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { Copy, Check, RefreshCw } from 'lucide-react'
 import { Hero1 } from '../SingleComponent.tsx/Hero1'
 import { Hero02 } from '../SingleComponent.tsx/Hero02'
 import Hero03 from '../SingleComponent.tsx/Hero03'
+import HeroInstall1 from '../InstallProcess/HeroInstall1'
+import HeroInstall2 from '../InstallProcess/HeroInstall2'
+import HeroInstall3 from '../InstallProcess/HeroInstall3'
 
 type HeroType = 'Hero1' | 'Hero2' | 'Hero3'
 type TabType = 'preview' | 'code'
-
-interface HeroSectionsProps {
-  value?: HeroType
-}
 
 interface TabOption {
   id: TabType
@@ -39,11 +39,12 @@ const HERO_CODE_MAP: Record<HeroType, string> = {
 // Hero 2 component code here...
 `,
   Hero3: `import React from 'react'
-// Hero 1 component code here...
+// Hero 3 component code here...
 `,
 }
 
-const HeroSection = ({ value }: HeroSectionsProps) => {
+const HeroSection = () => {
+  const pathname = usePathname()
   const [state, setState] = useState<ComponentState>({
     refreshKey: 0,
     activeTab: 'preview',
@@ -52,9 +53,17 @@ const HeroSection = ({ value }: HeroSectionsProps) => {
 
   const { refreshKey, activeTab, copied } = state
 
+  // Determine the hero type based on the URL path
+  const heroType = useMemo<HeroType | null>(() => {
+    if (pathname === '/hero/1') return 'Hero1'
+    if (pathname === '/hero/2') return 'Hero2'
+    if (pathname === '/hero/3') return 'Hero3'
+    return null
+  }, [pathname])
+
   const heroCode = useMemo(() => {
-    return value ? HERO_CODE_MAP[value] : ''
-  }, [value])
+    return heroType ? HERO_CODE_MAP[heroType] : ''
+  }, [heroType])
 
   const handleRefresh = useCallback(() => {
     setState(prev => ({
@@ -83,9 +92,24 @@ const HeroSection = ({ value }: HeroSectionsProps) => {
   }, [heroCode])
 
   const renderHeroComponent = () => {
-    if (value === 'Hero1') return <Hero1 key={refreshKey} />
-    if (value === 'Hero2') return <Hero02 key={refreshKey} />
-    if (value === 'Hero3') return <Hero03 key={refreshKey} />
+    if(heroType === 'Hero1') {
+    return ( <div>
+      <Hero1 key={refreshKey} />
+      <HeroInstall1/> 
+     </div> )
+    }
+    if(heroType === 'Hero2') {
+      return ( <div>
+        <Hero02 key={refreshKey} />
+        <HeroInstall2/> 
+       </div> )
+      }
+    if(heroType === 'Hero3') {
+      return ( <div>
+        <Hero03 key={refreshKey} />
+        <HeroInstall3/> 
+        </div> )
+      }
     return null
   }
 
@@ -118,17 +142,11 @@ const HeroSection = ({ value }: HeroSectionsProps) => {
           type="button"
           aria-label="Refresh preview"
         >
-          <img 
-            src="refresh.svg" 
-            alt="refresh" 
-            className="h-4 w-4 text-white"
-            width={16}
-            height={16}
-          />
+         <RefreshCw className="h-4 w-4 text-gray-400" />
         </button>
       </div>
 
-      <div className='mt-4 rounded-lg overflow-hidden border border-gray-800'>
+      <div className='mt-4 rounded-lg overflow-hidden  '>
         {activeTab === 'preview' ? (
           <div className='relative w-full'>
             {renderHeroComponent()}
